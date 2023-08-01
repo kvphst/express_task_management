@@ -11,11 +11,23 @@ router.get("/tasks", (req, res) => {
   try {
     const dataArray = [];
     for (let [key, value] of tasksMap) {
-      console.log(key);
-      console.log(value);
       dataArray.push(value);
     }
     res.status(201).send(dataArray);
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
+router.get("/tasks/:title", (req, res) => {
+  console.log("Received a request to get a tasks with title %s", req.params.title);
+  try {
+    if (!tasksMap.has(req.params.title)) {
+      res.status(400).send("Task not found");
+      return;
+    }
+    console.log("Found a task with title %s, sharing the same response", req.params.title);
+    res.status(201).send(tasksMap.get(req.params.title));
   } catch (e) {
     res.status(500).send(e);
   }
@@ -58,7 +70,7 @@ router.post("/tasks", (req, res) => {
 });
 
 router.put("/tasks/:title", (req, res) => {
-  console.log("Received a request to update a task with title %s",req.params.title);
+  console.log("Received a request to update a task with title %s", req.params.title);
   try {
     const title = req.params.title;
     const description = req.body.description;
@@ -102,7 +114,7 @@ router.put("/tasks/:title", (req, res) => {
 });
 
 router.delete("/tasks/:title", (req, res) => {
-  console.log("Received a request to delete a task with title %s",req.params.title);
+  console.log("Received a request to delete a task with title %s", req.params.title);
   try {
     const title = req.params.title;
 

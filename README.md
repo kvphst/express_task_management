@@ -16,4 +16,4 @@
             - middleware to handle user authorization
             - controller to handle more data validations/database connections etc.
 8. Start the program by using your preferred IDE's method or on terminal using "node server.js"
-9. Sample tests are committed to test folder. Running them parallel to server will give you a glance into the basic CRUD operations
+9. Install postman or similar software apps to test the server code.
